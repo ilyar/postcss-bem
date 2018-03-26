@@ -7,7 +7,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url":  "https://github.com/ileri/postcss-bem.git"
+        "url":  "https://github.com/kezzbracey/postcss-bem.git"
     },
     "dependencies": {
         "postcss": "^4.1.9"

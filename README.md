@@ -3,8 +3,8 @@
 [PostCSS] plugin implementing BEM as at-rules.
 
 [PostCSS]: https://github.com/postcss/postcss
-[ci-img]:  https://travis-ci.org/ileri/postcss-bem.svg
-[ci]:      https://travis-ci.org/ileri/postcss-bem
+[ci-img]:  https://travis-ci.org/kezzbracey/postcss-bem.svg
+[ci]:      https://travis-ci.org/kezzbracey/postcss-bem
 
 ```css
 @utility utilityName {
