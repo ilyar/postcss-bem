@@ -63,7 +63,7 @@ module.exports = postcss.plugin('postcss-bem', function (opts) {
                     });
                     component.parent.insertAfter(last, newRule);
                     last = newRule;
-                    rule.removeSelf();
+                    rule.remove();
                 }
             }
             if (!separator) {
@@ -78,7 +78,7 @@ module.exports = postcss.plugin('postcss-bem', function (opts) {
         var namespaces = {};
 
         if (opts.style === 'suit') {
-            css.eachAtRule('utility', function (utility) {
+            css.walkAtRules('utility', function (utility) {
                 if (!utility.params) {
                     throw utility.error('No names supplied to @utility');
                 }
@@ -129,16 +129,16 @@ module.exports = postcss.plugin('postcss-bem', function (opts) {
             });
         }
 
-        css.eachAtRule('component-namespace', function (namespace) {
+        css.walkAtRules('component-namespace', function (namespace) {
             var name = namespace.params;
 
             if (!namespace.nodes) {
                 namespaces[namespace.source.input.file || namespace.source.input.id] = name;
-                namespace.removeSelf();
+                namespace.remove();
                 return;
             }
 
-            namespace.eachAtRule('component', function (component) {
+            namespace.walkAtRules('component', function (component) {
                 processComponent(component, name);
             });
 
@@ -147,10 +147,10 @@ module.exports = postcss.plugin('postcss-bem', function (opts) {
                 node.moveAfter(namespace);
                 node = namespace.last;
             }
-            namespace.removeSelf();
+            namespace.remove();
         });
 
-        css.eachAtRule('component', function (component) {
+        css.walkAtRules('component', function (component) {
             var namespace = opts.defaultNamespace;
             var id = component.source.input.file || component.source.input.id;
             if (id in namespaces) {
@@ -161,7 +161,7 @@ module.exports = postcss.plugin('postcss-bem', function (opts) {
         });
 
         if (opts.style === 'suit') {
-            css.eachAtRule('when', function (when) {
+            css.walkAtRules('when', function (when) {
                 var parent = when.parent;
 
                 if (parent === css || parent.type !== 'rule') {
@@ -184,7 +184,7 @@ module.exports = postcss.plugin('postcss-bem', function (opts) {
                     node.moveTo(newWhen);
                 });
                 newWhen.moveAfter(parent);
-                when.removeSelf();
+                when.remove();
             });
         }
     };

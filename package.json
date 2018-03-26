@@ -15,7 +15,7 @@
         "url": "https://github.com/kezzbracey/postcss-bem.git"
     },
     "dependencies": {
-        "postcss": "^4.1.9"
+        "postcss": "^6.0.21"
     },
     "devDependencies": {
         "chai": "^4.1.2",
